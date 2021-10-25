@@ -54,5 +54,53 @@ namespace Mango.Services.ProductAPI.Controllers
             }
             return response;
         }
+
+        [HttpPost]
+        public async Task<ResponseDto> CreateProduct([FromBody] ProductDto model)
+        {
+            try
+            {
+                var result = await _repository.CreateUpdateProduct(model);
+                response.data = result;
+            }
+            catch (Exception ex)
+            {
+                response.isSuccess = false;
+                response.errorMessages = new List<string>() { ex.ToString() };
+            }
+            return response;
+        }
+
+        [HttpPut]
+        public async Task<ResponseDto> EditProduct([FromBody] ProductDto model)
+        {
+            try
+            {
+                var result = await _repository.CreateUpdateProduct(model);
+                response.data = result;
+            }
+            catch (Exception ex)
+            {
+                response.isSuccess = false;
+                response.errorMessages = new List<string>() { ex.ToString() };
+            }
+            return response;
+        }
+
+        [HttpDelete]
+        public async Task<ResponseDto> DeleteProduct(int id)
+        {
+            try
+            {
+                var result = await _repository.DeleteProducts(id);
+                response.data = result;
+            }
+            catch (Exception ex)
+            {
+                response.isSuccess = false;
+                response.errorMessages = new List<string>() { ex.ToString() };
+            }
+            return response;
+        }
     }
 }
